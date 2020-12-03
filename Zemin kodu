@@ -1,0 +1,50 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class zemin : MonoBehaviour
+{
+    public Transform karadelik,zemn,reklam,yildiz,tools;
+    int randx, randy;
+
+
+
+    void Update()
+    {
+
+        randx = Random.Range(-6, 6);
+        randy = Random.Range(6, 13);
+
+
+
+
+
+
+    }
+    private void OnCollisionEnter(Collision temas)
+    {
+        if (temas.gameObject.tag == "karadelik")
+        {
+            karadelik.position = new Vector3(randx, randy, 0f);
+         }
+
+        if (temas.gameObject.tag == "tools")
+        {
+            tools.position = new Vector3(randx, randy, 0f);
+        }
+
+        if (temas.gameObject.tag == "reklam")
+        {
+            reklam.position = new Vector3(randx, randy, 0f);
+        }
+
+
+        if (temas.gameObject.tag == "yildiz")
+        {
+            yildiz.position = new Vector3(randx, randy, 0f);
+        }
+
+    }
+
+
+}
