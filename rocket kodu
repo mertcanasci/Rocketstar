@@ -1,0 +1,105 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using TMPro;
+using UnityEngine.SceneManagement;
+public class rocketstar : MonoBehaviour
+{
+    float interpolationPeriod;
+    public float hiz;
+    float time = 0.0f;
+    public Transform yildiz, karadelik, reklam, tools;
+    int randx,randy;
+    int puan = 0;
+    public TextMeshProUGUI puanyazisi,zaman;
+    public float sure=5;
+
+    
+    void Update()
+    {
+
+        /*
+        time += Time.deltaTime;
+        if (time >= interpolationPeriod)
+        {   time = 0.0f;
+            interpolationPeriod = Random.Range(0.5f, 2.5f);
+            randx = Random.Range(-6, 6);
+            randy = Random.Range(6, 13);
+
+        }
+        
+         */
+
+        randx = Random.Range(-6, 6);
+        randy = Random.Range(6, 13);
+
+        float yataykontrol = Input.GetAxis("Horizontal");
+
+            transform.Translate(yataykontrol*hiz * Time.deltaTime, 0f, 0f);
+         sure -= Time.deltaTime;
+       
+        puanyazisi.text = ""+puan;
+        zaman.text = ""+ sure;
+
+
+        if (sure <= 0)
+        {
+            Time.timeScale = 0;
+
+            //reklam izle
+
+            }
+
+
+        if (Time.timeScale == 0)
+        {
+            if (Input.GetKeyDown(KeyCode.Return))
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+                Time.timeScale = 1;
+            }
+
+        }
+
+    }
+
+    private void OnCollisionEnter(Collision temas)
+    {
+        //float yildizx = Random.Range(-6f, 6f);
+        //float yildizy = Random.Range(6f, 15f);
+        int sayi = Random.Range(3, 8);
+
+        if (temas.gameObject.tag == "tools")
+        {
+
+            sure += 20.0f;
+        }
+
+        if (temas.gameObject.tag == "yildiz")
+        {
+            yildiz.position = new Vector3(randx, randy, 0f);
+
+            puan += sayi;
+
+        }
+        if (temas.gameObject.tag == "reklam")
+        {
+            Time.timeScale = 0;
+
+            // reklam izle
+
+        }
+
+
+        if (temas.gameObject.tag == "karadelik")
+        {
+            Time.timeScale = 0;
+
+                    }
+
+
+
+    }
+
+
+}
